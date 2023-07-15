@@ -27,6 +27,8 @@ public class APImonedas {
 			for(byte tmp: arrStream) {
 				cntJson += (char)tmp;
 			}
+			
+			System.out.println(cntJson);
 		
 		} catch (Exception e) {
 			e.getMessage();
@@ -38,7 +40,7 @@ public class APImonedas {
 		try {
 			
 			JSONObject json = new JSONObject(cntJson);
-			miPais = json.getString("name");
+			miPais = json.getString("iso2");
 			miMoneda = json.getString("currency");  
 			
 		} catch (Exception e) {

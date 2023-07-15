@@ -2,6 +2,19 @@ package Clases;
 
 import javax.swing.JOptionPane;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Iterator;
+
+import org.json.simple.parser.JSONParser;
+import org.json.JSONObject;
+import org.json.JSONArray;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.apache.commons.lang.ArrayUtils;
+
+
 public class ConversorMoneda {
 	
 	private Object eleccionLista;
@@ -13,25 +26,50 @@ public class ConversorMoneda {
 		valorIngresado = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad de dinero que deseas convertir"));
 	}
 	
-	public String[] ListaMonedas(String miMoneda) {
+	public String MiMoneda(String miPais) {
+		String nombreMoneda = "";
 		
-		String[] lista = { miMoneda + " a Dólar",
-				 miMoneda + " a Euros",
-				 miMoneda + " a Libras Esterlinas",
-				 miMoneda + " a Yen Japonés",
-				 miMoneda + " a Won sul-coreano",
-				 "Dólar a " + miMoneda,
-				 "Euros a " + miMoneda,
-				 "Libras Esterlinas a " + miMoneda,
-				 "Yen Japonés a " + miMoneda,
-				 "Won sul-coreano a " + miMoneda}; 
+		try {
+			nombreMonedas nm = new nombreMonedas();
+			JSONObject json = new JSONObject(nm.monedas);
+			nombreMoneda = json.getString(miPais);  
+			
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		
+		return nombreMoneda;
+	}
+	public static String[] removeElement(String[] arr, String item) {
+        return Arrays.stream(arr)
+                .filter(s -> !s.equals(item))
+                .toArray(String[]::new);
+    }
+	public String[] ListaMonedas(String miPais) {
+		
+		String[] lista = { miPais + " a Dólar",
+						   miPais + " a Euro",
+						   miPais + " a Libras Esterlinas",
+						   miPais + " a Yen Japonés",
+						   miPais + " a Won sur-coreano",
+						   "Dólar a " + miPais,
+						   "Euro a " + miPais,
+						   "Libras Esterlinas a " + miPais,
+						   "Yen Japonés a " + miPais,
+						   "Won sur-coreano a " + miPais } ;	
+				
+		String item = miPais + " a " + miPais;
+		lista = removeElement(lista, item);              		
 		
 		return lista;
 	}
 	
+	
+	
 	public void TipoMoneda(String[] lista) {
 		
-		eleccionLista = JOptionPane.showInputDialog(null,"Elige la moneda a la que deseas convertir tu dinero", "Monedas",JOptionPane.QUESTION_MESSAGE,null,lista, lista[0]);
+		eleccionLista = JOptionPane.showInputDialog(null,"Elige la moneda a la que deseas convertir tu dinero", "Monedas",JOptionPane.QUESTION_MESSAGE, null, lista, lista[0]);
+
 		
 		if(lista[0] == eleccionLista.toString()) {
 			monedaConversion = "USD";
