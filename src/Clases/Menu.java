@@ -32,18 +32,29 @@ public class Menu {
 						//Instancia del Objeto
 						ConversorMoneda cMoneda = new ConversorMoneda();
 						cMoneda.IngresarCantidad();
-						cMoneda.TipoMoneda(cMoneda.ListaMonedas(cMoneda.MiMoneda(ubicacion.miPais)));
+						cMoneda.TipoMoneda(cMoneda.ListaMonedas(cMoneda.MiMoneda(ubicacion.miPais)), cMoneda.MiMoneda(ubicacion.miPais));
 						moneda.precioConversion = Double.parseDouble(moneda.PrecioMonedaConversion(cMoneda.monedaConversion));						
-						JOptionPane.showMessageDialog(null, cMoneda.ConvertirDivisa(moneda.precioConversion));
+						JOptionPane.showMessageDialog(null, "Tienes " + cMoneda.SimboloMoneda(ubicacion.miMoneda) +  String.format("%.2f", cMoneda.ConvertirDivisa(moneda.precioConversion)) + " " + cMoneda.nombreConversion);
 						
 						break;
+						// ----------------------------------------------------------------------------------
 					case "Conversor de Temperatura":
+						
+						// Instancia del objeto
+						ConversorTemperatura temp = new ConversorTemperatura();
+						
+						temp.IngresarTemperatura();
+						temp.TipoConversion(temp.ListaTemperatura());
+						JOptionPane.showMessageDialog(null, "Temperatura: " + temp.ConvertirTemperatura(temp.ListaTemperatura()) + "° " + temp.NombreGrados(temp.ListaTemperatura()));
 						break;
 				}
 				
-				resp = JOptionPane.showConfirmDialog(null, "¿Desea continuar?", null, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				resp = JOptionPane.showConfirmDialog(null, "¿Desea continuar?", null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 				
 			} while (resp == JOptionPane.YES_OPTION);
+			
+			JOptionPane.showMessageDialog(null, "Programa terminado");
+			
 		} catch (Exception e) {
 			e.getMessage();
 		}		

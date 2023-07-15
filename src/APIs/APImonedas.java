@@ -27,9 +27,6 @@ public class APImonedas {
 			for(byte tmp: arrStream) {
 				cntJson += (char)tmp;
 			}
-			
-			System.out.println(cntJson);
-		
 		} catch (Exception e) {
 			e.getMessage();
 		}
