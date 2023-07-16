@@ -12,7 +12,7 @@ public class Menu {
 			int resp;
 			
 			do {
-				String[] opciones = {"Conversor de Moneda","Conversor de Temperatura"};
+				String[] opciones = {"Conversor de Moneda","Conversor de Temperatura", "Conversor de Velocidad"};
 				
 				Object opcion = JOptionPane.showInputDialog(null,"Seleccione una opción de conversión", "Menu",JOptionPane.QUESTION_MESSAGE,null,opciones, opciones[0]);
 				
@@ -45,7 +45,18 @@ public class Menu {
 						
 						temp.IngresarTemperatura();
 						temp.TipoConversion(temp.ListaTemperatura());
-						JOptionPane.showMessageDialog(null, "Temperatura: " + temp.ConvertirTemperatura(temp.ListaTemperatura()) + "° " + temp.NombreGrados(temp.ListaTemperatura()));
+						JOptionPane.showMessageDialog(null, "Temperatura: " + String.format("%.2f", temp.ConvertirTemperatura(temp.ListaTemperatura())) + "° " + temp.NombreGrados(temp.ListaTemperatura()));
+						
+						break;
+						// ----------------------------------------------------------------------------------
+					case "Conversor de Velocidad":
+						
+						ConversorVelocidad veloc = new ConversorVelocidad();
+						
+						veloc.IngresarVelocidad();
+						veloc.TipoConversion(veloc.ListaVelocidades());
+						JOptionPane.showMessageDialog(null, "Valocidad: " + String.format("%.2f", veloc.ConvertirVelocidad(veloc.ListaVelocidades())) + " " + veloc.NombreVelocidad(veloc.ListaVelocidades()));
+
 						break;
 				}
 				
