@@ -33,6 +33,7 @@ public class Menu {
 						ConversorMoneda cMoneda = new ConversorMoneda();
 						cMoneda.IngresarCantidad();
 						cMoneda.TipoMoneda(cMoneda.ListaMonedas(cMoneda.MiMoneda(ubicacion.miPais)), cMoneda.MiMoneda(ubicacion.miPais));
+						cMoneda.MonedaConversion(cMoneda.MiMoneda(ubicacion.miPais));
 						moneda.precioConversion = Double.parseDouble(moneda.PrecioMonedaConversion(cMoneda.monedaConversion));						
 						JOptionPane.showMessageDialog(null, "Tienes " + cMoneda.SimboloMoneda(ubicacion.miMoneda) +  String.format("%.2f", cMoneda.ConvertirDivisa(moneda.precioConversion)) + " " + cMoneda.nombreConversion);
 						

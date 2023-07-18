@@ -25,6 +25,8 @@ public class ConversorMoneda {
 	private Character simbolo;
 	public String nombreConversion;
 	
+	private int eliminado;
+	
 	public void IngresarCantidad() {
 		boolean bandera = false;
 		
@@ -75,75 +77,97 @@ public class ConversorMoneda {
 		String[] lista = null;
 
 		try {
-			lista = new String[] { miPais + " a Dólar",
+			lista = new String[] { miPais + " a Dolar",
 					   miPais + " a Euro",
 					   miPais + " a Libras Esterlinas",
 					   miPais + " a Yen Japonés",
 					   miPais + " a Won sur-coreano",
-					   "Dólar a " + miPais,
+					   "Dolar a " + miPais,
 					   "Euro a " + miPais,
 					   "Libras Esterlinas a " + miPais,
 					   "Yen Japonés a " + miPais,
 					   "Won sur-coreano a " + miPais } ;	
 			
 			String item = miPais + " a " + miPais;
-			lista = removeElement(lista, item);  
+			lista = removeElement(lista, item); 
+			
 			
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		            		
+		       
 		return lista;
 	}
 	
 	public void TipoMoneda(String[] lista, String miPais) {
 		try {	
 			eleccionLista = JOptionPane.showInputDialog(null,"Elige la moneda a la que deseas convertir tu dinero", "Monedas",JOptionPane.QUESTION_MESSAGE, null, lista, lista[0]);
-
-			if(lista[0] == eleccionLista.toString()) {
-				monedaConversion = "USD";
-				nombreConversion = "Dolares";
-				convertir = true;
-			} else if (lista[1] == eleccionLista.toString()) {
-				monedaConversion = "EUR";
-				nombreConversion = "Euros";
-				convertir = true;
-			} else if (lista[2] == eleccionLista.toString()) {
-				monedaConversion = "GBP";
-				nombreConversion = "Libras Esterlinas";
-				convertir = true;
-			} else if (lista[3] == eleccionLista.toString()) {
-				monedaConversion = "JPY";
-				nombreConversion = "Yenes Japoneses";
-				convertir = true;
-			} else if (lista[4] == eleccionLista.toString()) {
-				monedaConversion = "KRW";
-				nombreConversion = "Wones sur-coreanos";
-				convertir = true;
-			} else if (lista[5] == eleccionLista.toString()) {
-				monedaConversion = "USD";
-				nombreConversion = miPais;
-				convertir = false;
-			} else if (lista[6] == eleccionLista.toString()) {
-				monedaConversion = "EUR";
-				nombreConversion = miPais;
-				convertir = false;
-			} else if (lista[7] == eleccionLista.toString()) {
-				monedaConversion = "GBP";
-				nombreConversion = miPais;
-				convertir = false;
-			} else if (lista[8] == eleccionLista.toString()) {
-				monedaConversion = "JPY";
-				nombreConversion = miPais;
-				convertir = false;
-			} else if (lista[9] == eleccionLista.toString()) {
-				monedaConversion = "KRW";
-				nombreConversion = miPais;
-				convertir = false;
-			}
-			
 		} catch (Exception e) {
 			e.getMessage();
+		}
+	}
+	//Obtiene mi moneda en la lista de tipoMoneda
+	public String NombreMonedaConversion() {
+		String textoAntesDePalabra = "";
+        String palabraBuscada = " a"; // La palabra que deseas buscar
+
+        // Paso 1: Encuentra la posición de la palabra buscada en el texto
+        int posicionPalabra = eleccionLista.toString().indexOf(palabraBuscada);
+
+        if (posicionPalabra != -1) {
+            // Paso 2: Extrae la parte del texto antes de la palabra buscada
+            textoAntesDePalabra = eleccionLista.toString().substring(0, posicionPalabra).trim();    
+        }
+
+        return textoAntesDePalabra;
+	}
+
+
+	public void MonedaConversion(String miPais) {
+		String firstWord = eleccionLista.toString();
+        int n = miPais.length();
+        //String truncated = firstNChars(firstWord, n);
+          
+		String lastWord = eleccionLista.toString().substring(eleccionLista.toString().lastIndexOf("a ")+1);
+			
+		if(lastWord.equals(" Dolar")) {
+			monedaConversion = "USD";
+			nombreConversion = "Dolares";
+			convertir = true;
+		} else if(lastWord.equals(" Euro")) {
+			monedaConversion = "EUR";
+			nombreConversion = "Euros";
+			convertir = true;
+		} else if(lastWord.equals(" Libras Esterlinas")) {
+			monedaConversion = "GBP";
+			nombreConversion = lastWord;
+			convertir = true;
+		} else if(lastWord.equals(" Yen Japonés")) {
+			monedaConversion = "JPY";
+			nombreConversion = "Yenes Japoneses";
+			convertir = true;
+		} else if(lastWord.equals(" Won sur-coreano")) {
+			monedaConversion = "KRW";
+			nombreConversion = "Wones sur-coreanos";
+			convertir = true;
+		} else if(lastWord.equals(" " + miPais)) {
+			nombreConversion = miPais;			
+			if(NombreMonedaConversion().equals("Dolar")) {
+				monedaConversion = "USD";
+				convertir = false;
+			} else if(NombreMonedaConversion().equals("Euro")) {
+				monedaConversion = "EUR";
+				convertir = false;
+			} else if(NombreMonedaConversion().equals("Libras Esterlinas")) {
+				monedaConversion = "GBP";
+				convertir = false;
+			} else if(NombreMonedaConversion().equals("Yen Japonés")) {
+				monedaConversion = "JPY";
+				convertir = false;
+			} else if(NombreMonedaConversion().equals("Won sur-coreano")) {
+				monedaConversion = "KRW";
+				convertir = false;
+			}
 		}
 	}
 	

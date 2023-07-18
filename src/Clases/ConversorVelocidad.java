@@ -33,8 +33,21 @@ public class ConversorVelocidad {
 						   "De Metro por segundo a Kilómetro por hora",
 						   "De Kilómetro por hora a Metro por segundo",
 						   "De Nudo a Milla por hora",
-						   "De Milla por hora a Nudo"
-						    };
+						   "De Milla por hora a Nudo",
+						   "De Pie por segundo a Metro por segundo",
+				   		   "De Metro por segundo a Pie por segundo",
+						   "De Kilómetro por hora a Nudo",
+						   "De Nudo a Kilómetro",
+						   "De Milla por hora a Metro por segundo",
+						   "De Metro por segundo a Milla por hora",
+						   "De Nudo a Pie por segundo",
+						   "De Pie por segundo a Nudo",
+						   "De Kilómetro por hora a Milla por hora",
+						   "De Milla por hora a Kilómetro por hora",
+						   "De Metro por segundo a Nudo",
+						   "De Nudo a Metro por segundo",
+						   "De Kilómetro por hora a Pie por segundo",
+						   "De Pie por segundo a Kilómetro por hora" };
 		
 		return lista;
 	}
